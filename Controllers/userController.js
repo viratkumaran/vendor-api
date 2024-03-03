@@ -39,16 +39,21 @@ const userController = {
     async addOrder(req,res){
         try{
             let getuserData =req.body
+            console.log(getuserData)
+            // return;
             if(getuserData){
-                let obj={
-                    "ordernumber": req.body.ordernumber,
-                    "productname":req.body.productname,
-                    "price":req.body.price,
-                    "empId":req.body.empId,
-                    "entryId":req.body.entryId,
+                // let obj={
+                //     "ordernumber": req.body.ordernumber,
+                //     "productList":{
+                //         "name":req.body.productListname,
+                //         "price":req.body.price
+                //     },
+                //     "totalPrice":req.body.price,
+                //     "empId":req.body.empId,
+                //     "entryId":req.body.entryId,
 
-                }
-                    let oderCreate =await orderDb.create(obj);
+                // }
+                    let oderCreate =await orderDb.create(getuserData);
                     console.log(oderCreate)
                     if(oderCreate){
                         res.json({"status":true,"message":"Order Created Successfully",data:oderCreate});
