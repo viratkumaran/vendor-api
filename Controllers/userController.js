@@ -78,22 +78,26 @@ const userController = {
             if(getUserLoginData){
                 getUserLoginData.email= (getUserLoginData.email).toLowerCase();
                 let userLogin =await employeeDb.findOne({email: getUserLoginData.email, password:getUserLoginData.password});
-                console.log(userLogin,'testuser--------------')
-                let data={
-                    userId:userLogin._id,
-                    name:userLogin.name,
-                    desc:userLogin.desc,
-                    empid:userLogin.empid,
-                    location:userLogin.currentLocations,
-                    companyname:userLogin.serviceName,
-                    phoneno:userLogin.PhoneNumber,
-                    jobtitle:userLogin.jobtitle
-                }
-                if(userLogin.availableStatus == 'Approved'){
+                if(userLogin){
+                    console.log(userLogin,'testuser--------------')
+                    let data={
+                        userId:userLogin._id,
+                        name:userLogin.name,
+                        desc:userLogin.desc,
+                        empid:userLogin.empid,
+                        location:userLogin.currentLocations,
+                        companyname:userLogin.serviceName,
+                        phoneno:userLogin.PhoneNumber,
+                        jobtitle:userLogin.jobtitle
+                    }
                     res.json({"status":true,"message":"Login Successfully",data:data});
                 }else{
-                    res.json({"status":false,"message":"Admin need to Approve"})
-                }
+                    res.json({"status":false,"message":"Invalid Login"})
+                }      
+                
+            }else{
+                res.json({"status":false,"message":"Something went wrong please try again"})
+
             }
         }catch(err){
             res.json({"status":false,"message":"Something went wrong please try again"})
