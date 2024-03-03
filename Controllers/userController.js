@@ -42,11 +42,9 @@ const userController = {
             if(getuserData){
                 let obj={
                     "ordernumber": req.body.ordernumber,
-                    "companyname":req.body.companyname,
                     "productname":req.body.productname,
                     "price":req.body.price,
-                    "duration":req.body.duration,
-                    "userId":req.body.userId,
+                    "empId":req.body.empId,
                     "entryId":req.body.entryId,
 
                 }
