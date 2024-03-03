@@ -270,5 +270,23 @@ const userController = {
             res.json({"status":false,"message":"Something went wrong please try again"})
         }
     },
+    
+    async viewTaskCustomer(req,res){
+        try{
+            let getTaskEmployee = await taskDb.find({empId:req.body.empId })
+            console.log(getTaskEmployee,'employeeeList')
+            // return false;
+            if(getTaskEmployee){
+                res.json({"status":true,"message":"Successfully fetched the Task of particular employee",data:getTaskEmployee})
+            }
+            else{
+                res.json({"status":false,"message":"Invalid response"})
+            }
+        }catch(err){
+            res.json({"status":false,"message":"Something went wrong please try again"})
+
+        }
+        
+    },
 }
 module.exports=userController;

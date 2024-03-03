@@ -13,6 +13,8 @@ var serviceSchema = new Schema({
 	"certificate":{type:String},
 	"photo":{type:String},
 	"remark":{type:String},
+	"latitude":{type:String},
+	"longitude":{type:String},
 	"createdDate":{type: Date, default: Date.now},
     "updatedDate":{type: Date, default: Date.now},
 });

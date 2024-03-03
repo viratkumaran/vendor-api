@@ -13,5 +13,6 @@ router.post('/assignTask',userController.assignTask);
 router.post('/updateTask',userController.updateTask);
 router.get('/getTask',userController.getTask);
 router.post('/deleteTask',userController.deleteTask);
+router.post('/viewTaskCustomer',userController.viewTaskCustomer);
 
 module.exports = router;

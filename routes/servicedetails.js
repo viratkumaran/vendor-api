@@ -12,5 +12,4 @@ router.post('/updateProduct',serviceController.updateProduct);
 router.post('/deleteProduct',serviceController.deleteProduct);
 
 
-
 module.exports = router;

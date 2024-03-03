@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const serviceDb = mongoose.model("Service");
 const producteDb = mongoose.model("Product");
+const employeeDb = mongoose.model("Employee");
 
 const serviceController = {
     async serviceCreation(req,res){
@@ -21,10 +22,12 @@ const serviceController = {
                 "certificate":req.body.certificate,
                 "photo":req.body.photo,
                 "remark":req.body.remark,
+                "latitude":req.body.latitude,
+                "longitude":req.body.longitude
             }
             let servicedetailsCreate =await serviceDb.create(obj);
             if(servicedetailsCreate){
-                res.json({"status":true,"message":"Service Created Successfully"});
+                res.json({"status":true,"message":"Service Created Successfully",data:servicedetailsCreate});
 
             }else{
                 res.json({"status":false,"message":"Failed to create service"});
@@ -158,5 +161,6 @@ const serviceController = {
             res.json({"status":false,"message":"Something went wrong please try again"})
         }
     },
+
 }
 module.exports=serviceController;
