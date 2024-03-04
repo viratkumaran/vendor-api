@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const userDb = mongoose.model("User");
+const serviceDb = mongoose.model("Service");
 const employeeDb = mongoose.model("Employee");
 const entryDb = mongoose.model("Entry");
 const orderDb = mongoose.model("Order");
@@ -196,6 +196,7 @@ const userController = {
     async assignTask(req,res){
         try{
             let getTaskData =req.body
+            console.log("----------------",req.body)
             if(getTaskData){
                 let obj={
                     "empId": req.body.empId,
@@ -281,14 +282,38 @@ const userController = {
     async viewTaskCustomer(req,res){
         try{
             let getTaskEmployee = await taskDb.find({empId:req.body.empId })
-            console.log(getTaskEmployee,'employeeeList')
-            // return false;
-            if(getTaskEmployee){
-                res.json({"status":true,"message":"Successfully fetched the Task of particular employee",data:getTaskEmployee})
-            }
-            else{
-                res.json({"status":false,"message":"Invalid response"})
-            }
+            console.log("----------",getTaskEmployee.length)
+            let customerList=[];
+            let data=[{}]
+            // if(getTaskEmployee){
+                for(var j=0;j<getTaskEmployee.length;j++){
+                    console.log("kkkkkkkkkkk",getTaskEmployee[j])
+                    for(var i=0;i<getTaskEmployee[j].customer.length;i++){
+                        console.log("iiiiiiiiiiiiiii",getTaskEmployee[j].customer[i])
+                        let result = await serviceDb.find({_id:getTaskEmployee[j].customer[i]})
+                        customerList.push(result)
+                    }
+                    data={
+                        empId:getTaskEmployee[j].empId,
+                        area:getTaskEmployee[j].area,
+                        start:getTaskEmployee[j].start,
+                        end:getTaskEmployee[j].end,
+                        customerDet:customerList
+                        }
+                }
+                
+                console.log("employeeeList----------",data)
+                // return false;
+                // console.log(getTaskEmployee,'employeeeList')
+                // return false;
+                if(getTaskEmployee){
+                    res.json({"status":true,"message":"Successfully fetched the Task of particular employee",data:data})
+                }
+                else{
+                    res.json({"status":false,"message":"Invalid response"})
+                }
+            // }
+            
         }catch(err){
             res.json({"status":false,"message":"Something went wrong please try again"})
 
