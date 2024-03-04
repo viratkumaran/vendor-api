@@ -199,7 +199,7 @@ const userController = {
             if(getTaskData){
                 let obj={
                     "empId": req.body.empId,
-                    "customer":req.body.customer,
+                    "customerId":req.body.customer,
                     "area":req.body.area,
                     "latitude":req.body.latitude,
                     "longitude":req.body.longitude,
@@ -207,7 +207,7 @@ const userController = {
                     "end":req.body.end,
 
                 }
-                    let taskCreate =await taskDb.create(obj);
+                    let taskCreate =await taskDb.create(getTaskData);
                     console.log(taskCreate)
                     if(taskCreate){
                         res.json({"status":true,"message":"Task Created Successfully",data:taskCreate});
