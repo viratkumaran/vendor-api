@@ -19,7 +19,7 @@ mongoose.connection.on('connected', function () {
   require('./User');
   require('./Entry');
   require('./Order');
-  require('./Product');
+  require('./Area');
   require('./Task');
 
 

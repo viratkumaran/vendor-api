@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const serviceDb = mongoose.model("Service");
-const producteDb = mongoose.model("Product");
+const areaDb = mongoose.model("Area");
 const employeeDb = mongoose.model("Employee");
 
 const serviceController = {
@@ -87,12 +87,12 @@ const serviceController = {
             res.json({"status":false,"message":"Something went wrong please try again"})
         }
     },
-    async getProductList(req,res){
+    async getAreaList(req,res){
         try{
-            let getServicedet = await producteDb.find({ })
+            let getServicedet = await areaDb.find({ })
             // return false;
             if(getServicedet){
-                res.json({"status":true,"message":"Successfully fetched the Product list",data:getServicedet})
+                res.json({"status":true,"message":"Successfully fetched the Area list",data:getServicedet})
             }
             else{
                 res.json({"status":false,"message":"Invalid response"})
@@ -103,23 +103,22 @@ const serviceController = {
         }
         
     },
-    async createProduct(req,res){
+    async createArea(req,res){
         try{
             let getserviceData =req.body
             console.log('test',getserviceData)
         if(getserviceData){
             let obj={
-                "product": req.body.product,
-                "price":req.body.price,
+                "areaName": req.body.areaName,
                 "desc":req.body.desc
 
             }
-            let productCreate =await producteDb.create(obj);
+            let productCreate =await areaDb.create(obj);
             if(productCreate){
-                res.json({"status":true,"message":"Product Created Successfully"});
+                res.json({"status":true,"message":"Area Created Successfully"});
 
             }else{
-                res.json({"status":false,"message":"Failed to create Product"});
+                res.json({"status":false,"message":"Failed to create Area"});
 
             }
         }else{
@@ -130,31 +129,31 @@ const serviceController = {
         }
         
     },
-    async updateProduct(req,res){
+    async updateArea(req,res){
         try{
             let getValue =req.body;
             if(getValue){   
-            let updateServiceDet = await producteDb.updateOne({"_id":req.body._id},{$set:getValue});
+            let updateServiceDet = await areaDb.updateOne({"_id":req.body._id},{$set:getValue});
             // console.log(updateServiceDet)
-            res.json({"status":true,"message":"Product Updated successfully"});
+            res.json({"status":true,"message":"Area Updated successfully"});
             }else{
-                res.json({"status":false,"message":"Product not Updated"});
+                res.json({"status":false,"message":"Area not Updated"});
             }
 
         }catch(err){
             res.json({"status":false,"message":"Something went wrong please try again"});
         }
     },
-    async deleteProduct(req,res){
+    async deleteArea(req,res){
         try{
             console.log('yrrr',req.body)
             let getSer = req.body
             if(getSer){
-                let deleteServiceDet = await producteDb.deleteOne({"_id":req.body.id});
+                let deleteServiceDet = await areaDb.deleteOne({"_id":req.body.id});
                 console.log(deleteServiceDet)
-                res.json({"status":true,"message":"Product Deleted successfully"});
+                res.json({"status":true,"message":"Area Deleted successfully"});
             }else{
-                res.json({"status":false,"message":"Product not deleted"});
+                res.json({"status":false,"message":"Area not deleted"});
             }
             
         }catch(err){
