@@ -5,8 +5,6 @@ var orderSchema = new Schema({
     "productList":{type:Array},
     "totalPrice":{type:Number},
     "empId": { type: mongoose.Schema.Types.ObjectId, ref: 'Employee' },
-    "entryId": { type: mongoose.Schema.Types.ObjectId, ref: 'Entry' },
-
 
 });
 module.exports = mongoose.model('Order', orderSchema, 'Order')
