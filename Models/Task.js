@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var taskSchema = new Schema({
     "empId": { type: mongoose.Schema.Types.ObjectId, ref: 'Employee' },
-	"customer"   : {type:Array},
+	"customer"   : {type: Object},
     "area":{type:String},
     "start":{type:String},
     "end":{type:String},

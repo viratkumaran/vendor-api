@@ -23,7 +23,8 @@ const serviceController = {
                 "photo":req.body.photo,
                 "remark":req.body.remark,
                 "latitude":req.body.latitude,
-                "longitude":req.body.longitude
+                "longitude":req.body.longitude,
+                "empId":req.body.empId
             }
             let servicedetailsCreate =await serviceDb.create(obj);
             if(servicedetailsCreate){

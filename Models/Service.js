@@ -15,6 +15,7 @@ var serviceSchema = new Schema({
 	"remark":{type:String},
 	"latitude":{type:String},
 	"longitude":{type:String},
+	"empId":{ type: mongoose.Schema.Types.ObjectId, ref: 'Employee' },
 	"createdDate":{type: Date, default: Date.now},
     "updatedDate":{type: Date, default: Date.now},
 });

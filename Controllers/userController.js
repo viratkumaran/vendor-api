@@ -139,7 +139,7 @@ const userController = {
     },
     async viewOrder(req,res){
         try{
-            let getUser = await orderDb.find({"userId":req.body.userId,"entryId":req.body.entryId })
+            let getUser = await orderDb.find({"empId":req.body.userId})
             console.log('EMP------------',getUser)
             // return false;
             if(getUser){
@@ -242,7 +242,7 @@ const userController = {
         }
     },
     async getTask(req,res){
-        try{
+        // try{
             let getUser= await taskDb.aggregate([
                 { $lookup:
                     {
@@ -253,17 +253,28 @@ const userController = {
                     }
                 }
             ])
-              console.log(getUser,'--')
+            // let result =[];
+            // let overall =[];
+            // for(var i=0;i<getUser.length;i++){
+            //     for(var j=0;j<getUser[i].customer.length;j++){
+            //         let customer = await serviceDb.find({_id:getUser[i].customer[j]})
+            //         result.push(customer)
+            //     }
+
+            // }
+            // console.log("rrrrrrrrrrrrrrrrrrrrrr",result)
+            // overall.push()
+            // return;
             if(getUser){
                 res.json({"status":true,"message":"Successfully fetched the Task list",data:getUser})
             }
             else{
                 res.json({"status":false,"message":"Invalid response"})
             }
-        }catch(err){
-            res.json({"status":false,"message":"Something went wrong please try again"})
+        // }catch(err){
+        //     res.json({"status":false,"message":"Something went wrong please try again"})
 
-        }
+        // }
         
     },
     async deleteTask(req,res){
@@ -282,32 +293,24 @@ const userController = {
     async viewTaskCustomer(req,res){
         try{
             let getTaskEmployee = await taskDb.find({empId:req.body.empId })
-            console.log("----------",getTaskEmployee.length)
-            let customerList=[];
-            let data=[{}]
-            // if(getTaskEmployee){
-                for(var j=0;j<getTaskEmployee.length;j++){
-                    console.log("kkkkkkkkkkk",getTaskEmployee[j])
-                    for(var i=0;i<getTaskEmployee[j].customer.length;i++){
-                        console.log("iiiiiiiiiiiiiii",getTaskEmployee[j].customer[i])
-                        let result = await serviceDb.find({_id:getTaskEmployee[j].customer[i]})
-                        customerList.push(result)
-                    }
-                    data={
-                        empId:getTaskEmployee[j].empId,
-                        area:getTaskEmployee[j].area,
-                        start:getTaskEmployee[j].start,
-                        end:getTaskEmployee[j].end,
-                        customerDet:customerList
-                        }
-                }
-                
-                console.log("employeeeList----------",data)
-                // return false;
-                // console.log(getTaskEmployee,'employeeeList')
-                // return false;
+            // console.log("----------",getTaskEmployee.length)
+            // let customerList=[];
+            // let data=[{}]
+            //     for(var j=0;j<getTaskEmployee.length;j++){
+            //         for(var i=0;i<getTaskEmployee[j].customer.length;i++){
+            //             let result = await serviceDb.find({_id:getTaskEmployee[j].customer[i]})
+            //             customerList.push(result)
+            //         }
+            //         data={
+            //             empId:getTaskEmployee[j].empId,
+            //             area:getTaskEmployee[j].area,
+            //             start:getTaskEmployee[j].start,
+            //             end:getTaskEmployee[j].end,
+            //             customerDet:customerList
+            //             }
+            //     }
                 if(getTaskEmployee){
-                    res.json({"status":true,"message":"Successfully fetched the Task of particular employee",data:data})
+                    res.json({"status":true,"message":"Successfully fetched the Task of particular employee",data:getTaskEmployee})
                 }
                 else{
                     res.json({"status":false,"message":"Invalid response"})
