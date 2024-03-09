@@ -12,6 +12,8 @@ const serviceController = {
             let obj={
                 "name":req.body.name,
                 "area": req.body.area,
+                "address": req.body.address,
+                "under": req.body.under,
                 "product":req.body.product,
                 "customerno":req.body.customerno,
                 "alternateno":req.body.alternateno,
@@ -159,6 +161,17 @@ const serviceController = {
             
         }catch(err){
             res.json({"status":false,"message":"Something went wrong please try again"})
+        }
+    },
+    async selectAreaCustomer(req,res){
+        try{
+            let getServicedet = await serviceDb.find({area:req.body.area })
+            console.log(getServicedet)
+            res.json({"status":true,"data":getServicedet})
+
+        }catch(err){
+            res.json({"status":false,"message":"Something went wrong please try again"})
+
         }
     },
 

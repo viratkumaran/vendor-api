@@ -10,6 +10,7 @@ router.get('/getAreaList',serviceController.getAreaList);
 router.post('/createArea',serviceController.createArea);
 router.post('/updateArea',serviceController.updateArea);
 router.post('/deleteArea',serviceController.deleteArea);
+router.post('/selectAreaCustomer',serviceController.selectAreaCustomer);
 
 
 module.exports = router;

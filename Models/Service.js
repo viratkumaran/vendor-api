@@ -3,6 +3,8 @@ var Schema = mongoose.Schema;
 var serviceSchema = new Schema({
 	"name"   : {type:String},
 	"area"   : {type:String},
+	"address":{type:String},
+	"under":{type:String},
 	"product"   : {type:Array},
     "customerno":{type:String},
 	"alternateno":{type:String},
