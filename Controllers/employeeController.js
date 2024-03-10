@@ -142,7 +142,19 @@ const employeeController = {
                     message: "Files uploaded successfully",
                     data: req.files,
                   });
-    }
+    },
+    async deleteMultiEmployee(req,res){
+        try{
+            console.log('yrrr',req.body.body._id)
+            // return false;
+            let deleteEmp = await employeeDb.deleteMany({"_id":req.body.body._id});
+            console.log(deleteEmp)
+            res.json({"status":true,"message":"Employee Deleted successfully"})
+
+        }catch(err){
+            res.json({"status":false,"message":"Something went wrong please try again"})
+        }
+    },
 
 };
 

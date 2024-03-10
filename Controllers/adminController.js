@@ -9,8 +9,8 @@ const adminController = {
             let getData = req.body;
             console.log(getData)
             if(getData){
-                getData.loginId= (getData.loginId).toLowerCase();
-                let adminLogin =await adminDb.findOne({email: getData.loginId, password:getData.password});
+                getData.email= (getData.email).toLowerCase();
+                let adminLogin =await adminDb.findOne({email: getData.email, password:getData.password});
                 if(adminLogin){
                     res.json({"status":true,"message":"Login Successfully"});
                 }else{

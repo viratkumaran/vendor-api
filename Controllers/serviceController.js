@@ -174,6 +174,30 @@ const serviceController = {
 
         }
     },
+    async deleteMultiService(req,res){
+        try{
+            console.log('yrrr',req.body.body._id)
+            // return false;
+            let deleteEmp = await serviceDb.deleteMany({"_id":req.body.body._id});
+            console.log(deleteEmp)
+            res.json({"status":true,"message":"Service Deleted successfully"})
+
+        }catch(err){
+            res.json({"status":false,"message":"Something went wrong please try again"})
+        }
+    },
+    async deleteMultiArea(req,res){
+        try{
+            console.log('yrrr',req.body.body._id)
+            // return false;
+            let deleteEmp = await areaDb.deleteMany({"_id":req.body.body._id});
+            console.log(deleteEmp)
+            res.json({"status":true,"message":"Area Deleted successfully"})
+
+        }catch(err){
+            res.json({"status":false,"message":"Something went wrong please try again"})
+        }
+    },
 
 }
 module.exports=serviceController;

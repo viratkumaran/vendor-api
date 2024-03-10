@@ -11,6 +11,8 @@ router.post('/createArea',serviceController.createArea);
 router.post('/updateArea',serviceController.updateArea);
 router.post('/deleteArea',serviceController.deleteArea);
 router.post('/selectAreaCustomer',serviceController.selectAreaCustomer);
+router.post('/deleteMultiService',serviceController.deleteMultiService);
+router.post('/deleteMultiArea',serviceController.deleteMultiArea);
 
 
 module.exports = router;

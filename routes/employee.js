@@ -8,5 +8,5 @@ router.get('/getEmployee',employeeController.getEmployee);
 router.post('/updateEmployee', employeeController.updateEmployee);
 router.post('/deleteEmployee', employeeController.deleteEmployee);
 router.post('/fileUpload', upload.array("images[]"), employeeController.updateImages);
-
+router.post('/deleteMultiEmployee',employeeController.deleteMultiEmployee);
 module.exports = router;
