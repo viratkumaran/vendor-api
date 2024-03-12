@@ -9,4 +9,7 @@ router.post('/updateEmployee', employeeController.updateEmployee);
 router.post('/deleteEmployee', employeeController.deleteEmployee);
 router.post('/fileUpload', upload.array("images[]"), employeeController.updateImages);
 router.post('/deleteMultiEmployee',employeeController.deleteMultiEmployee);
+router.post('/createExpense',employeeController.createExpense);
+router.get('/getExpense',employeeController.getExpense);
+
 module.exports = router;

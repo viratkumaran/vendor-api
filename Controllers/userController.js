@@ -288,8 +288,7 @@ const userController = {
         }catch(err){
             res.json({"status":false,"message":"Something went wrong please try again"})
         }
-    },
-    
+    },  
     async viewTaskCustomer(req,res){
         try{
             let getTaskEmployee = await taskDb.find({empId:req.body.empId })
@@ -322,6 +321,18 @@ const userController = {
 
         }
         
+    },
+    async multipleDeleteTask(req,res){
+        try{
+            console.log('yrrr',req.body.body._id)
+            // return false;
+            let deleteEmp = await taskDb.deleteMany({"_id":req.body.body._id});
+            console.log(deleteEmp)
+            res.json({"status":true,"message":"Task Deleted successfully"})
+
+        }catch(err){
+            res.json({"status":false,"message":"Something went wrong please try again"})
+        }
     },
 }
 module.exports=userController;

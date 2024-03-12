@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const employeeDb = mongoose.model("Employee");
 const customId = require("custom-id");
 const upload = require("../image_upload");
+const expensiveDb = mongoose.model("Expensive");
 
 const employeeController = {
     
@@ -154,6 +155,59 @@ const employeeController = {
         }catch(err){
             res.json({"status":false,"message":"Something went wrong please try again"})
         }
+    },
+    async createExpense(req,res){
+        try{
+            let getEmpData =req.body
+            if(getEmpData){
+                console.log("testdata",getEmpData)
+                let obj={
+                    "empId": req.body.empId,
+                    "proof":req.body.proof,
+                    "price":req.body.price,
+                }
+                let expensiveCreate =await expensiveDb.create(obj);
+                if(expensiveCreate){
+                    res.json({"status":true,"message":"Expensive Created Successfully"});
+
+                }else{
+                    res.json({"status":false,"message":"Failed to createExpensive"});
+
+                }
+            }else{
+                res.json({"status":false,"message":"Error"})
+            }
+        }catch(err){
+            res.json({"status":false,"message":"Something went wrong please try again"})
+        }
+        
+    },
+    async getExpense(req,res){
+        try{
+            console.log("reports")
+            let getUser= await expensiveDb.aggregate([
+                { $lookup:
+                    {
+                       from: "Employee",
+                       localField: "empId",
+                       foreignField: "_id",
+                       as: "userlist"
+                    }
+                }
+            ])
+              console.log(getUser,'--')
+            if(getUser){
+                res.json({"status":true,"message":"Successfully fetched the expensive list",data:getUser})
+            }
+            else{
+                res.json({"status":false,"message":"Invalid response"})
+            }
+        }catch(err){
+            console.log(err)
+            res.json({"status":false,"message":"Something went wrong please try again"})
+
+        }
+        
     },
 
 };

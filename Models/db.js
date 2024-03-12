@@ -21,5 +21,6 @@ mongoose.connection.on('connected', function () {
   require('./Order');
   require('./Area');
   require('./Task');
+  require('./Expensive');
 
 

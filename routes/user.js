@@ -14,5 +14,6 @@ router.post('/updateTask',userController.updateTask);
 router.get('/getTask',userController.getTask);
 router.post('/deleteTask',userController.deleteTask);
 router.post('/viewTaskCustomer',userController.viewTaskCustomer);
+router.post('/multipleDeleteTask',userController.multipleDeleteTask);
 
 module.exports = router;
