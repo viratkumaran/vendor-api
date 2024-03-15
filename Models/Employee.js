@@ -15,6 +15,7 @@ var employeeSchema = new Schema({
     "currentLocations":{type:String},
     "empid":{type:String},
     "jobtitle":{type:String},
+    "attendence":{type:Boolean,default:false},
     "availableStatus":{type:String},//Pending,Approved,Rejected
     "slot":{type:String},//Available,Waiting,Booked,Not Available
     "createdDate":{type: Date, default: Date.now},
