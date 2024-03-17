@@ -158,7 +158,8 @@ const userController = {
                         "customerList.name":1,
                         "customerList.area":1,
                         "productList":1,
-                        "ordernumber":1
+                        "ordernumber":1,
+                        "totalPrice":1
                     }
                 }
                
