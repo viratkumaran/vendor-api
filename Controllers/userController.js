@@ -139,7 +139,31 @@ const userController = {
     },
     async viewOrder(req,res){
         try{
-            let getUser = await orderDb.find({"empId":req.body.userId})
+            console.log(req.body.empId)
+            let getUser= await orderDb.aggregate([
+                {
+                    $match:{"empId":new mongoose.Types.ObjectId(req.body.empId)}
+                },
+                { $lookup:
+                    {
+                       from: "Service",
+                       localField: "custId",
+                       foreignField: "_id",
+                       as: "customerList"
+                    }
+                },
+                {
+                    $project:
+                    {
+                        "customerList.name":1,
+                        "customerList.area":1,
+                        "productList":1,
+                        "ordernumber":1
+                    }
+                }
+               
+            ])
+            // let getUser = await orderDb.find({"empId":req.body.empId})
             console.log('EMP------------',getUser)
             // return false;
             if(getUser){
