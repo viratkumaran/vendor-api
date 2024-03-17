@@ -22,5 +22,7 @@ mongoose.connection.on('connected', function () {
   require('./Area');
   require('./Task');
   require('./Expensive');
+  require('./Collectiondet');
+
 
 
