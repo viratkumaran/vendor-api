@@ -25,7 +25,7 @@ app.use('/admin', adminRouter);
 app.use('/employee',employeeRouter);
 app.use('/service',serviceRouter);
 app.use('/user',userRouter);
-
+// app.use('/image',public)
 let server;
 if (config.serverType == 'http') {
   let http = require('http');
@@ -34,9 +34,13 @@ if (config.serverType == 'http') {
   let https = require('https');
   server = https.createServer(config.options, app);
 }
+app.use("/images",express.static(__dirname + '/public/images/nov'));
+
 server.listen(port, () => console.log(`Express server running `+ port));
 app.get("/", function (req, res) {
-	res.statusMessage("success");
+  console.log('welcome')
+	res.end("success");
 });
+
 
 module.exports = app;
