@@ -15,5 +15,6 @@ router.get('/getTask',userController.getTask);
 router.post('/deleteTask',userController.deleteTask);
 router.post('/viewTaskCustomer',userController.viewTaskCustomer);
 router.post('/multipleDeleteTask',userController.multipleDeleteTask);
+router.post('/statusOrderCheck',userController.statusOrderCheck);
 
 module.exports = router;

@@ -182,6 +182,23 @@ const userController = {
         }
         
     },
+    async statusOrderCheck(req,res){
+        try{
+            let getUser = await orderDb.find({"empId":req.body.empId })
+            console.log('EMP------------',getUser)
+            // return false;
+            if(getUser){
+                res.json({"status":true,"message":"Successfully fetched the order list",data:getUser})
+            }
+            else{
+                res.json({"status":false,"message":"Invalid response"})
+            }
+        }catch(err){
+            res.json({"status":false,"message":"Something went wrong please try again"})
+
+        }
+        
+    },
     async viewReports(req,res){
         try{
             console.log("reports")
@@ -226,25 +243,34 @@ const userController = {
             let getTaskData =req.body
             console.log("----------------",req.body)
             if(getTaskData){
-                let obj={
-                    "empId": req.body.empId,
-                    "customerId":req.body.customer,
-                    "area":req.body.area,
-                    "latitude":req.body.latitude,
-                    "longitude":req.body.longitude,
-                    "start":req.body.start,
-                    "end":req.body.end,
+                let getEmployeeStatus =await employeeDb.find({'_id':req.body.empId})
+                console.log(getEmployeeStatus)
+                if(getEmployeeStatus){
+                        let obj={
+                            "empId": req.body.empId,
+                            "customer":req.body.customer,
+                            "area":req.body.area,
+                            // "latitude":req.body.latitude,
+                            // "longitude":req.body.longitude,
+                            "start":req.body.start,
+                            "end":req.body.end,
 
-                }
-                    let taskCreate =await taskDb.create(getTaskData);
-                    console.log(taskCreate)
-                    if(taskCreate){
-                        res.json({"status":true,"message":"Task Created Successfully",data:taskCreate});
+                        }
+                        console.log(obj)
+                            let taskCreate =await taskDb.create(getTaskData);
+                            console.log(taskCreate)
+                            if(taskCreate){
+                                res.json({"status":true,"message":"Task Created Successfully",data:taskCreate});
 
-                    }else{
-                        res.json({"status":false,"message":"Failed to create Task"});
+                            }else{
+                                res.json({"status":false,"message":"Failed to create Task"});
 
-                    }
+                            }
+                
+
+
+                        
+                 }
                 
             }else{
                 res.json({"status":false,"message":"Error"})
